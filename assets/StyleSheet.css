@@ -100,20 +100,59 @@ nav ul li a:hover {
     background-color: #ffa500;
 }
 
-
-/* Media queries for responsiveness */
-@media only screen and (min-width: 768px) {
-    /* Adjustments for larger screens */
+/* Adjustments for mobile phones */
+@media only screen and (max-width: 767px) {
+    header {
+        padding: 15px;
+    }
+    nav ul li a {
+        display: block;
+        padding: 5px 0;
+        width: 100%;
+        text-align: center;
+    }
     .main-content {
-        margin: 20px auto; /* Center main content */
-        width: 70%; /* Adjust width for larger screens */
+        padding: 75px;
+    }
+    .SideImage {
+        max-width: 25%;
     }
 }
 
-@media only screen and (min-width: 1200px) {
-    /* Adjustments for extra-large screens */
+/* Adjustments for tablets and larger screens */
+@media only screen and (min-width: 768px) {
+    header {
+        padding: 20px;
+    }
+    nav ul li a {
+        padding: 15px 30px;
+    }
     .main-content {
-        width: 50%; /* Further adjust width for extra-large screens */
+        padding: 20px;
+    }
+    .SideImage {
+        max-width: 25%;
+        height: aut;
+    }
+}
+
+/* Adjustments for laptops and desktops */
+@media only screen and (min-width: 992px) {
+    header {
+        padding: 30px;
+    }
+    nav ul li a {
+        padding: 20px 40px;
+    }
+    .main-content {
+        padding: 30px;
+    }
+}
+
+/* Adjustments for extra-large screens */
+@media only screen and (min-width: 1200px) {
+    .main-content {
+        width: 50%;
     }
 }
 
