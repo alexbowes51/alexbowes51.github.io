@@ -18,16 +18,7 @@ header {
     width: auto;
 }
 
-.SideImage {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: auto;
-    height: 50%;
-    max-width: 25%;
-    z-index: -1;
-}
+
 
 /* Styles for the main content */
 .main-content {
@@ -104,25 +95,26 @@ nav ul li a:hover {
 /* Adjustments for mobile phones */
 @media only screen and (max-width: 767px) {
     header {
-        padding: 15px;
+        max-width: 100%;
     }
     nav ul li a {
         display: block;
-        padding: 5px 0;
-        width: 100%;
+        padding: 1px;
+        max-width: 100%;
         text-align: center;
     }
     .main-content {
-        padding: 75px;
-    }
-    .SideImage {
-        max-width: 25%;
+        margin-top: 60px;
+        max-width: 100%;
+        position:absolute;
     }
     .SA_photo{
-        max-width: 75%;
+        max-width: 50%;
+        max-height: 50%;
     }
     .DD_photo{
         max-width: 50%;
+        max-height: 25%;
     }
 }
 
@@ -137,10 +129,7 @@ nav ul li a:hover {
     .main-content {
         padding: 20px;
     }
-    .SideImage {
-        max-width: 25%;
-        height: aut;
-    }
+   
 }
 
 /* Adjustments for laptops and desktops */
