@@ -1,0 +1,166 @@
+/* Styles for the body */
+body {
+    font-family: Helvetica;
+    background-color: #ffedbf;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    
+}
+
+header {
+    background: linear-gradient(to left, 	#9b2948, #ff7251);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    width: auto;
+}
+
+.SideImage {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: auto;
+    height: 50%;
+    max-width: 25%;
+    z-index: -1;
+}
+
+/* Styles for the main content */
+.main-content {
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 170px;
+    left: 25%; /* Adjusted to match image width */
+    width: auto;
+    box-sizing: border-box;
+    z-index: 0;
+}
+
+.SA_photo {
+  border: brown solid 10px;
+ background-color: rgb(242, 210, 2);
+}
+
+.DD_photo {
+    border: brown solid 10px; /* Match border style */
+    background-color: rgb(242, 210, 2); /* Match background color */
+    display: inline-block; /* Adjust display */
+    margin: 10px 0; /* Add margin for spacing */
+}
+/* Styles for headings */
+h1, h2, h3 {
+    color: #ffcd74;
+}
+
+/* Styles for links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+nav {
+    text-align: center;
+    margin-top: 0px; /* Adjust the margin as needed */
+    position: relative; /* Set position to relative */
+    z-index: 1; /* Set z-index to layer it above the main content but below the header */
+    background-color:#ffcd74; /* Add a solid background color with opacity */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 20px 40px;
+    background-color: #ffcd74;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #ffa500;
+}
+
+/* Adjustments for mobile phones */
+@media only screen and (max-width: 767px) {
+    header {
+        padding: 15px;
+    }
+    nav ul li a {
+        display: block;
+        padding: 5px 0;
+        width: 100%;
+        text-align: center;
+    }
+    .main-content {
+        padding: 75px;
+    }
+    .SideImage {
+        max-width: 25%;
+    }
+    .SA_photo{
+        max-width: 75%;
+    }
+    .DD_photo{
+        max-width: 50%;
+    }
+}
+
+/* Adjustments for tablets and larger screens */
+@media only screen and (min-width: 768px) {
+    header {
+        padding: 20px;
+    }
+    nav ul li a {
+        padding: 15px 30px;
+    }
+    .main-content {
+        padding: 20px;
+    }
+    .SideImage {
+        max-width: 25%;
+        height: aut;
+    }
+}
+
+/* Adjustments for laptops and desktops */
+@media only screen and (min-width: 992px) {
+    header {
+        padding: 30px;
+    }
+    nav ul li a {
+        padding: 20px 40px;
+    }
+    .main-content {
+        padding: 30px;
+    }
+}
+
+/* Adjustments for extra-large screens */
+@media only screen and (min-width: 1200px) {
+    .main-content {
+        width: 50%;
+    }
+}
+
+

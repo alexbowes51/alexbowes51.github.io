@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
     width: auto;
+    
 }
 
 header {
@@ -16,6 +17,17 @@ header {
     z-index: 2;
     width: auto;
 }
+
+p {
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  margin-bottom: 20px ;
+}
+
+h1{
+    margin-top: 10px;
+}
+
 
 .SideImage {
     position: fixed;
@@ -107,7 +119,7 @@ nav ul li a:hover {
     }
     nav ul li a {
         display: block;
-        padding: 5px 0;
+        padding: 1px ;
         width: 100%;
         text-align: center;
     }
@@ -116,6 +128,12 @@ nav ul li a:hover {
     }
     .SideImage {
         max-width: 25%;
+    }
+    .SA_photo{
+        max-width: 75%;
+    }
+    .DD_photo{
+        max-width: 50%;
     }
 }
 
