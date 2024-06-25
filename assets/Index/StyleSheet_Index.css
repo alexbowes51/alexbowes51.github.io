@@ -110,13 +110,11 @@ nav ul li a:hover {
         max-width: 100%;
         position:absolute;
     }
-    .SA_photo{
-        max-width: 35%;
-        max-height: 35%;
-    }
-    .DD_photo{
-        max-width: 35%;
-        max-height: 35%;
+    .SA_photo, .DD_photo {
+        max-width: 100%; 
+        max-height: 100%; 
+        width: 50% !important; 
+        height: 50% !important;
     }
 }
 
