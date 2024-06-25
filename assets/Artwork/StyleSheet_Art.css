@@ -18,15 +18,12 @@ header {
     width: auto;
 }
 
-.SideImage {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: auto;
-    height: 50%;
-    max-width: 25%;
-    z-index: -1;
+.Drawnings {
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    text-align: inline;
 }
 
 /* Styles for the main content */
