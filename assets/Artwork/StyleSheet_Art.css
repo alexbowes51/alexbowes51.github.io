@@ -39,17 +39,6 @@ header {
     z-index: 0;
 }
 
-.SA_photo {
-  border: brown solid 10px;
- background-color: rgb(242, 210, 2);
-}
-
-.DD_photo {
-    border: brown solid 10px; /* Match border style */
-    background-color: rgb(242, 210, 2); /* Match background color */
-    display: inline-block; /* Adjust display */
-    margin: 10px 0; /* Add margin for spacing */
-}
 /* Styles for headings */
 h1, h2, h3 {
     color: #ffcd74;
@@ -109,17 +98,25 @@ nav ul li a:hover {
         width: 100%;
         text-align: center;
     }
+
+    .Drawnings {
+        margin-top: 80px;
+        display: flex;
+        flex-wrap: wrap;
+        max-width: fit-content;
+        max-height: 25%;
+        gap: 20px;
+        text-align: inline;
+    }
+
     .main-content {
-        padding: 75px;
-    }
-    .SideImage {
-        max-width: 25%;
-    }
-    .SA_photo{
-        max-width: 75%;
-    }
-    .DD_photo{
-        max-width: 50%;
+        background-color: #fff;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 220px;
+        width: auto;
+ 
     }
 }
 
