@@ -40,8 +40,13 @@ header {
 }
 
 /* Styles for headings */
-h1, h2, h3 {
+h1 {
     color: #ffcd74;
+}
+
+h2{
+    color: #ffcd74;
+    padding-top: 60px;
 }
 
 /* Styles for links */
