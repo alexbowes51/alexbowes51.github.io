@@ -31,7 +31,6 @@ header {
     background-color: #fff;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: absolute;
     top: 170px;
     left: 25%; /* Adjusted to match image width */
     width: auto;
@@ -92,6 +91,39 @@ nav ul li a:hover {
     background-color: #ffa500;
 }
 
+
+footer {
+    background: linear-gradient(to left, 	#9b2948, #ff7251);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.footer-Index {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+.footer-Index h4 {
+    margin-bottom: 10px;
+}
+
+.footer-Index a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-Index a:hover {
+    text-decoration: underline;
+}
+
 /* Adjustments for mobile phones */
 @media only screen and (max-width: 767px) {
     header {
@@ -118,7 +150,6 @@ nav ul li a:hover {
         background-color: #fff;
         padding: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        position: absolute;
         top: 220px;
         width: auto;
  
