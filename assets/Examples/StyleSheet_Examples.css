@@ -1,0 +1,192 @@
+/* Styles for the body */
+body {
+    font-family: Helvetica;
+    background-color: #ffedbf;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    
+}
+
+video {
+    border: 5px solid #ff7251; /* Border with one of your gradient colors */
+    border-radius: 15px; /* Add rounded corners */
+    box-shadow: 0px 14px 20px rgba(0, 0, 0, 0.4); /* Add a subtle shadow */
+    max-width: 100%; /* Responsive */
+    display: block; /* Ensure the video takes its own line */
+}
+
+video:hover {
+    transform: scale(1.03); /* Slight zoom on hover */
+    transition: transform 0.3s ease; /* Smooth hover transition */
+}
+
+header {
+    background: linear-gradient(to left, 	#9b2948, #ff7251);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    width: auto;
+}
+/* Styles for the main content */
+.main-content {
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    top: 170px;
+    left: 25%; /* Adjusted to match image width */
+    width: auto;
+    box-sizing: border-box;
+    z-index: 0;
+}
+
+/* Styles for headings */
+h1 {
+    color: #ffcd74;
+}
+
+h2{
+    color: #ffcd74;
+    padding-top: 30px;
+}
+
+/* Styles for links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+nav {
+    text-align: center;
+    margin-top: 0px; /* Adjust the margin as needed */
+    position: relative; /* Set position to relative */
+    z-index: 1; /* Set z-index to layer it above the main content but below the header */
+    background-color:#ffcd74; /* Add a solid background color with opacity */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 20px 40px;
+    background-color: #ffcd74;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #ffa500;
+}
+
+
+footer {
+    background: linear-gradient(to left, 	#9b2948, #ff7251);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    
+}
+
+.footer-Index {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+.footer-Index h4 {
+    margin-bottom: 10px;
+}
+
+.footer-Index a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-Index a:hover {
+    text-decoration: underline;
+}
+
+/* Adjustments for mobile phones */
+@media only screen and (max-width: 767px) {
+    header {
+        padding: 15px;
+    }
+    nav ul li a {
+        display: block;
+        padding: 5px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-content {
+        background-color: #fff;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        top: 220px;
+        width: auto;
+ 
+    }
+}
+
+/* Adjustments for tablets and larger screens */
+@media only screen and (min-width: 768px) {
+    header {
+        padding: 20px;
+    }
+    nav ul li a {
+        padding: 15px 30px;
+    }
+    .main-content {
+        padding: 20px;
+    }
+    .SideImage {
+        max-width: 25%;
+        height: aut;
+    }
+}
+
+/* Adjustments for laptops and desktops */
+@media only screen and (min-width: 992px) {
+    header {
+        padding: 30px;
+    }
+    nav ul li a {
+        padding: 20px 40px;
+    }
+    .main-content {
+        padding: 30px;
+    }
+}
+
+/* Adjustments for extra-large screens */
+@media only screen and (min-width: 1200px) {
+    .main-content {
+        width: 50%;
+        margin-left: 25%;
+    }
+}
+
+
