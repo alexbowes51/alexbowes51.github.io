@@ -233,6 +233,121 @@ nav ul li a:hover {
     color: #0f0f0f;
 }
 
+.project-badge.council {
+    background: linear-gradient(145deg, #10b981, #059669);
+    color: white;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.project-showcase-item.featured {
+    border: 2px solid #60a5fa;
+    background: linear-gradient(145deg, #1e1e2e, #2a2a4e);
+    box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
+}
+
+.project-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.achievement-highlights {
+    background: linear-gradient(145deg, rgba(16, 185, 129, 0.1), rgba(96, 165, 250, 0.1));
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.achievement-item:last-child {
+    margin-bottom: 0;
+}
+
+.achievement-item i {
+    color: #60a5fa;
+    font-size: 1.2em;
+    margin-top: 2px;
+    min-width: 20px;
+}
+
+.achievement-item span {
+    color: #cbd5e1;
+    line-height: 1.5;
+}
+
+.achievement-item strong {
+    color: #60a5fa;
+    font-weight: 600;
+}
+
+.info-link {
+    background: linear-gradient(145deg, #374151, #4b5563);
+}
+
+.info-link:hover {
+    background: linear-gradient(145deg, #4b5563, #6b7280);
+}
+
+.featured-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.featured-achievement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(145deg, rgba(16, 185, 129, 0.1), rgba(96, 165, 250, 0.1));
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.featured-achievement i {
+    color: #fbbf24;
+    font-size: 1.1em;
+}
+
+.featured-achievement span {
+    color: #cbd5e1;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.project-links-featured {
+    margin-top: 15px;
+}
+
+.project-link-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: linear-gradient(145deg, #059669, #10b981);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.project-link-small:hover {
+    background: linear-gradient(145deg, #047857, #059669);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
 .project-description {
     color: #cbd5e1;
     line-height: 1.6;
