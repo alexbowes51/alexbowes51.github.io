@@ -1,54 +1,54 @@
 /* Styles for the body */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+    background: linear-gradient(135deg, #1a0f00 0%, #2e1a0a 50%, #3d2410 100%);
     background-attachment: fixed;
     margin: 0;
     padding: 0;
     width: auto;
     min-height: 100vh;
-    color: #e0e0e0;
+    color: #f5e6d3;
     line-height: 1.6;
 }
 
 header {
-    background: linear-gradient(135deg, #0f3460 0%, #16537e 50%, #1e3a8a 100%);
-    color: white;
+    background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+    color: #1a0f00;
     padding: 30px 20px;
     text-align: center;
     position: relative;
     z-index: 2;
     width: auto;
-    box-shadow: 0 4px 20px rgba(30, 58, 138, 0.3);
+    box-shadow: 0 4px 20px rgba(217, 119, 6, 0.4);
     backdrop-filter: blur(10px);
 }
 
 header h1 {
     margin: 0 0 10px 0;
     font-size: 2.5em;
-    color: white;
+    color: #1a0f00;
 }
 
 .header-subtitle {
     margin: 0;
     font-size: 1.2em;
-    color: #93c5fd;
+    color: #422006;
     font-weight: 300;
 }
 
 p {
     padding: 15px;
     margin-bottom: 20px;
-    background: rgba(30, 30, 30, 0.3);
+    background: rgba(46, 26, 10, 0.3);
     border-radius: 8px;
-    border-left: 4px solid #3b82f6;
+    border-left: 4px solid #f59e0b;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 h1{
     margin-top: 20px;
-    color: #60a5fa;
-    text-shadow: 0 2px 10px rgba(96, 165, 250, 0.3);
+    color: #fbbf24;
+    text-shadow: 0 2px 10px rgba(251, 191, 36, 0.4);
 }
 
 .Download-English{
@@ -80,13 +80,13 @@ h1{
 
 /* Hero Section with Profile */
 .hero-section {
-    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a3e 100%);
+    background: linear-gradient(135deg, #2e1a0a 0%, #3d2410 100%);
     padding: 80px 20px;
     margin: 20px auto;
     max-width: 1200px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(217, 119, 6, 0.3);
 }
 
 .hero-content {
@@ -113,14 +113,14 @@ h1{
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #60a5fa;
-    box-shadow: 0 10px 30px rgba(96, 165, 250, 0.3);
+    border: 4px solid #fbbf24;
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
     transition: all 0.3s ease;
 }
 
 .main-profile:hover {
     transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(96, 165, 250, 0.5);
+    box-shadow: 0 15px 40px rgba(251, 191, 36, 0.6);
 }
 
 .additional-photos {
@@ -133,14 +133,14 @@ h1{
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #3b82f6;
+    border: 2px solid #f59e0b;
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .travel-photo:hover, .adventure-photo:hover {
     transform: scale(1.1);
-    border-color: #60a5fa;
+    border-color: #fbbf24;
 }
 
 .profile-intro {
@@ -150,7 +150,7 @@ h1{
 .profile-title {
     font-size: 2.5em;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -160,7 +160,7 @@ h1{
 .profile-description {
     font-size: 1.2em;
     line-height: 1.6;
-    color: #cbd5e1;
+    color: #f5e6d3;
 }
 
 /* Section Headers */
@@ -172,7 +172,7 @@ h1{
 .section-header h2 {
     font-size: 2.5em;
     margin-bottom: 15px;
-    color: #60a5fa;
+    color: #fbbf24;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -181,7 +181,7 @@ h1{
 
 .section-subtitle {
     font-size: 1.1em;
-    color: #94a3b8;
+    color: #e0cdb0;
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.5;
@@ -200,33 +200,33 @@ h1{
 }
 
 .profile-card {
-    background: linear-gradient(145deg, #1e1e1e, #2a2a3e);
+    background: linear-gradient(145deg, #2e1a0a, #3d2410);
     padding: 30px;
     border-radius: 15px;
-    border: 1px solid rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(217, 119, 6, 0.3);
     transition: all 0.3s ease;
     text-align: center;
 }
 
 .profile-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(30, 58, 138, 0.3);
+    box-shadow: 0 20px 40px rgba(217, 119, 6, 0.4);
 }
 
 .card-icon {
     font-size: 3em;
-    color: #60a5fa;
+    color: #fbbf24;
     margin-bottom: 20px;
 }
 
 .profile-card h3 {
-    color: #60a5fa;
+    color: #fbbf24;
     margin-bottom: 15px;
     font-size: 1.3em;
 }
 
 .profile-card p {
-    color: #cbd5e1;
+    color: #f5e6d3;
     line-height: 1.6;
     text-align: left;
     padding: 0;
@@ -252,47 +252,47 @@ h1{
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 25px;
-    background: linear-gradient(145deg, #1e1e1e, #2a2a3e);
+    background: linear-gradient(145deg, #2e1a0a, #3d2410);
     padding: 30px;
     border-radius: 15px;
-    border: 1px solid rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(217, 119, 6, 0.3);
     transition: all 0.3s ease;
 }
 
 .experience-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(30, 58, 138, 0.3);
+    box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4);
 }
 
 .experience-icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(145deg, #0f3460, #1e3a8a);
+    background: linear-gradient(145deg, #d97706, #f59e0b);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5em;
-    color: white;
+    color: #1a0f00;
 }
 
 .experience-content h3 {
-    color: #60a5fa;
+    color: #fbbf24;
     margin-bottom: 5px;
     font-size: 1.4em;
 }
 
 .experience-content h4 {
-    color: #94a3b8;
+    color: #e0cdb0;
     margin-bottom: 10px;
     font-weight: 600;
 }
 
 .experience-period {
-    color: #3b82f6;
+    color: #fbbf24;
     font-weight: 600;
     margin-bottom: 15px;
-    background: rgba(59, 130, 246, 0.1);
+    background: rgba(251, 191, 36, 0.15);
     padding: 5px 15px;
     border-radius: 20px;
     display: inline-block;
@@ -305,7 +305,7 @@ h1{
 }
 
 .achievement-list li {
-    color: #cbd5e1;
+    color: #f5e6d3;
     padding: 5px 0;
     position: relative;
     padding-left: 25px;
@@ -313,7 +313,7 @@ h1{
 
 .achievement-list li:before {
     content: "▸";
-    color: #60a5fa;
+    color: #fbbf24;
     position: absolute;
     left: 0;
     font-weight: bold;
@@ -327,17 +327,17 @@ h1{
 }
 
 .skill-tag {
-    background: rgba(96, 165, 250, 0.1);
-    color: #93c5fd;
+    background: rgba(251, 191, 36, 0.15);
+    color: #fcd34d;
     padding: 6px 12px;
     border-radius: 15px;
     font-size: 0.85em;
-    border: 1px solid rgba(96, 165, 250, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.3);
     transition: all 0.3s ease;
 }
 
 .skill-tag:hover {
-    background: rgba(96, 165, 250, 0.2);
+    background: rgba(251, 191, 36, 0.25);
     transform: translateY(-2px);
 }
 
@@ -353,17 +353,17 @@ h1{
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    background: rgba(30, 58, 138, 0.1);
+    background: rgba(217, 119, 6, 0.15);
     border-radius: 8px;
 }
 
 .language-name {
-    color: #cbd5e1;
+    color: #f5e6d3;
     font-weight: 600;
 }
 
 .language-level {
-    color: #60a5fa;
+    color: #fbbf24;
     font-size: 0.9em;
 }
 
@@ -385,7 +385,7 @@ h1{
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(180deg, #60a5fa, #3b82f6);
+    background: linear-gradient(180deg, #fbbf24, #f59e0b);
 }
 
 .timeline-item {
@@ -398,34 +398,34 @@ h1{
 .timeline-marker {
     width: 60px;
     height: 60px;
-    background: linear-gradient(145deg, #0f3460, #1e3a8a);
+    background: linear-gradient(145deg, #d97706, #f59e0b);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #1a0f00;
     font-size: 1.2em;
     z-index: 1;
-    border: 3px solid #1a1a2e;
+    border: 3px solid #2e1a0a;
 }
 
 .timeline-content {
     flex: 1;
-    background: linear-gradient(145deg, #1e1e1e, #2a2a3e);
+    background: linear-gradient(145deg, #2e1a0a, #3d2410);
     padding: 25px;
     border-radius: 15px;
-    border: 1px solid rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(217, 119, 6, 0.3);
     margin-top: 10px;
 }
 
 .timeline-content h3 {
-    color: #60a5fa;
+    color: #fbbf24;
     margin-bottom: 15px;
     font-size: 1.3em;
 }
 
 .timeline-content p {
-    color: #cbd5e1;
+    color: #f5e6d3;
     line-height: 1.6;
     padding: 0;
     background: none;
@@ -442,33 +442,33 @@ h1{
 .download-card {
     max-width: 600px;
     margin: 40px auto 0;
-    background: linear-gradient(145deg, #1e1e1e, #2a2a3e);
+    background: linear-gradient(145deg, #2e1a0a, #3d2410);
     padding: 40px;
     border-radius: 20px;
-    border: 1px solid rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(217, 119, 6, 0.3);
     text-align: center;
     transition: all 0.3s ease;
 }
 
 .download-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(30, 58, 138, 0.3);
+    box-shadow: 0 15px 40px rgba(217, 119, 6, 0.4);
 }
 
 .download-icon {
     font-size: 4em;
-    color: #60a5fa;
+    color: #fbbf24;
     margin-bottom: 20px;
 }
 
 .download-content h3 {
-    color: #60a5fa;
+    color: #fbbf24;
     margin-bottom: 15px;
     font-size: 1.5em;
 }
 
 .download-content p {
-    color: #94a3b8;
+    color: #e0cdb0;
     margin-bottom: 25px;
     padding: 0;
     background: none;
@@ -481,8 +481,8 @@ h1{
     align-items: center;
     gap: 10px;
     padding: 15px 30px;
-    background: linear-gradient(145deg, #0f3460, #1e3a8a);
-    color: white;
+    background: linear-gradient(145deg, #d97706, #f59e0b);
+    color: #1a0f00;
     text-decoration: none;
     border-radius: 25px;
     transition: all 0.3s ease;
@@ -491,56 +491,57 @@ h1{
 }
 
 .download-btn:hover {
-    background: linear-gradient(145deg, #1e3a8a, #3b82f6);
+    background: linear-gradient(145deg, #f59e0b, #fbbf24);
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(30, 58, 138, 0.5);
-    color: white;
+    box-shadow: 0 10px 30px rgba(217, 119, 6, 0.6);
+    color: #1a0f00;
 }
 
 /* Legacy styles for compatibility */
 .Download-English{
     display: inline-block;
     padding: 15px 25px;
-    border: 2px solid #1e3a8a;
-    background: linear-gradient(145deg, #0f3460, #1e3a8a);
+    border: 2px solid #f59e0b;
+    background: linear-gradient(145deg, #d97706, #f59e0b);
     border-radius: 10px;
-    color: white;
+    color: #1a0f00;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+    box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
     margin: 10px;
+    font-weight: 500;
 }
 
 .Download-English:hover {
-    background: linear-gradient(145deg, #1e3a8a, #3b82f6);
+    background: linear-gradient(145deg, #f59e0b, #fbbf24);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.5);
+    box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6);
 }
 
 /* Styles for headings */
 h1, h2, h3 {
-    color: #60a5fa;
-    text-shadow: 0 2px 10px rgba(96, 165, 250, 0.3);
+    color: #fbbf24;
+    text-shadow: 0 2px 10px rgba(251, 191, 36, 0.4);
     margin-bottom: 15px;
 }
 
 /* Styles for links */
 a {
-    color: #3b82f6;
+    color: #f59e0b;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #60a5fa;
-    text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+    color: #fbbf24;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
 }
 
 nav {
     text-align: center;
     position: relative;
     z-index: 1;
-    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a3e 100%);
+    background: linear-gradient(135deg, #2e1a0a 0%, #3d2410 100%);
     padding: 15px 0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -562,21 +563,21 @@ nav ul li {
 nav ul li a {
     display: inline-block;
     padding: 12px 25px;
-    background: linear-gradient(145deg, #0f3460, #1e3a8a);
-    color: #ffffff;
+    background: linear-gradient(145deg, #d97706, #f59e0b);
+    color: #1a0f00;
     text-decoration: none;
     border-radius: 25px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
-    border: 1px solid rgba(96, 165, 250, 0.2);
+    box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+    border: 1px solid rgba(251, 191, 36, 0.3);
     font-weight: 500;
 }
 
 nav ul li a:hover {
-    background: linear-gradient(145deg, #1e3a8a, #3b82f6);
+    background: linear-gradient(145deg, #f59e0b, #fbbf24);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.5);
-    color: #ffffff;
+    box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6);
+    color: #1a0f00;
 }
 
 /* Enhanced Footer */
@@ -590,11 +591,12 @@ nav ul li a:hover {
 }
 
 .footer-section h4 {
-    color: #60a5fa;
+    color: #1a0f00;
     margin-bottom: 15px;
     display: flex;
     align-items: center;
     gap: 8px;
+    font-weight: 600;
 }
 
 .contact-info {
@@ -604,35 +606,37 @@ nav ul li a:hover {
 }
 
 .contact-link {
-    color: #93c5fd;
+    color: #1a0f00;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
     transition: color 0.3s ease;
     padding: 5px 0;
+    font-weight: 500;
 }
 
 .contact-link:hover {
-    color: #60a5fa;
-    text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+    color: #422006;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
 }
 
 .footer-bottom {
     text-align: center;
     margin-top: 30px;
     padding-top: 20px;
-    border-top: 1px solid rgba(96, 165, 250, 0.2);
-    color: #94a3b8;
+    border-top: 1px solid rgba(26, 15, 0, 0.3);
+    color: #1a0f00;
+    font-weight: 500;
 }
 
 footer {
-    background: linear-gradient(135deg, #0f3460 0%, #16537e 50%, #1e3a8a 100%);
-    color: white;
+    background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+    color: #1a0f00;
     padding: 30px 0;
     text-align: center;
     width: 100%;
-    box-shadow: 0 -4px 20px rgba(30, 58, 138, 0.3);
+    box-shadow: 0 -4px 20px rgba(217, 119, 6, 0.4);
     backdrop-filter: blur(10px);
     margin-top: auto;
 }
@@ -648,18 +652,21 @@ footer {
 
 .footer-Index h4 {
     margin-bottom: 10px;
+    color: #1a0f00;
+    font-weight: 600;
 }
 
 .footer-Index a {
-    color: #60a5fa;
+    color: #1a0f00;
     text-decoration: none;
     margin: 0 10px;
     transition: color 0.3s ease;
+    font-weight: 500;
 }
 
 .footer-Index a:hover {
-    color: #93c5fd;
-    text-shadow: 0 0 10px rgba(147, 197, 253, 0.5);
+    color: #422006;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
 }
 
 /* Adjustments for mobile phones */
