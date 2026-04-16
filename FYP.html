@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEVOID — Alex Bowes | SETU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel:wght@700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Drifting stars -->
+  <canvas id="stars"></canvas>
+  <!-- CRT scanline overlay -->
+  <div class="scanlines"></div>
+
+  <nav id="nav">
+    <span class="nav-logo">D·E·V·O·I·D</span>
+    <ul>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#features">FEATURES</a></li>
+      <li><a href="#gallery">SCREENSHOTS</a></li>
+      <li><a href="#tech">TECH</a></li>
+      <li><a href="#dev">DEVELOPER</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+
+      <div class="hud-info-box">
+        <span>Day: 8</span>
+        <span>Time: BLOOD MOON!</span>
+        <span>Weather: Rain</span>
+      </div>
+
+      <div class="hud-roman">IV</div>
+
+      <div class="hero-center">
+        <p class="act-tag">A C T &nbsp; I V</p>
+        <h1 class="title">DEVOID</h1>
+        <p class="tagline">When the last light dies —<br>only the void remains.</p>
+
+        <div class="hud-strip">
+          <div class="hp-group">
+            <span class="hud-lbl">HP</span>
+            <div class="hp-track"><div class="hp-fill"></div></div>
+            <span class="hud-lbl">100</span>
+          </div>
+          <div class="pts-group">
+            POINTS: <span id="pts" class="pts-val">0</span>
+          </div>
+        </div>
+
+        <a href="#about" class="enter-btn">— ENTER THE VOID —</a>
+      </div>
+
+    </div>
+    <div class="scroll-cue">▼ scroll ▼</div>
+  </section>
+
+  <section class="about" id="about">
+    <p class="sec-tag">// ABOUT THE GAME</p>
+    <div class="about-grid">
+
+      <div class="about-copy">
+        <h2>WHAT IS <span class="red">DEVOID</span>?</h2>
+        <p>
+          DEVOID is a top-down survival shooter written from scratch in
+          <strong>C++ with SFML</strong>. Navigate a procedurally generated
+          open world, outlast relentless enemy waves, and survive the
+          Blood Moon — a recurring event where the sky bleeds red and
+          everything that hunts you doubles down.
+        </p>
+        <p>
+          No tutorial. No checkpoints. Just you, the dark, and whatever
+          weapons you can scrounge from the walls.
+        </p>
+
+        <div class="stat-strip">
+          <div class="stat">
+            <span class="stat-n">4+</span>
+            <span class="stat-l">Weapon Types</span>
+          </div>
+          <div class="stat">
+            <span class="stat-n">∞</span>
+            <span class="stat-l">Procedural Maps</span>
+          </div>
+          <div class="stat">
+            <span class="stat-n">1-4P</span>
+            <span class="stat-l">Co-op Online</span>
+          </div>
+          <div class="stat">
+            <span class="stat-n">∅</span>
+            <span class="stat-l">Easy Mode</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-shot">
+        <img src="IMAGES/BLOOD_MON.png" alt="Blood Moon Event in DEVOID" />
+        <p class="shot-lbl">[ BLOOD MOON — DAY 8 — WEATHER: RAIN ]</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <p class="sec-tag">// FEATURES</p>
+    <h2 class="sec-h2">WHAT AWAITS YOU</h2>
+
+    <div class="feat-grid">
+
+      <div class="feat-card">
+        <div class="feat-hd">
+          <span class="feat-num">01</span>
+          <h3>WALL-BUY ARSENAL</h3>
+        </div>
+        <p>Purchase weapons pinned to the world's walls. Every point spent is a lifeline — spend the wrong way and you die slow.</p>
+        <img src="IMAGES/WALL_BUY.png" alt="Wall Buy system" class="feat-img" />
+      </div>
+
+      <div class="feat-card feat-blood">
+        <div class="feat-hd">
+          <span class="feat-num">02</span>
+          <h3>BLOOD MOON EVENTS</h3>
+        </div>
+        <p>A crimson tide rises. Spawns surge, the sky bleeds, and the void closes in. Survive — or become part of it.</p>
+        <img src="IMAGES/BLOOD_MON.png" alt="Blood Moon event" class="feat-img" />
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-hd">
+          <span class="feat-num">03</span>
+          <h3>PROCEDURAL TERRAIN</h3>
+        </div>
+        <p>Perlin noise stitches forests, open fields, and rivers together differently every run. No map is ever the same.</p>
+        <img src="IMAGES/noise_visualization.png" alt="Perlin noise map" class="feat-img pixelated" />
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-hd">
+          <span class="feat-num">04</span>
+          <h3>ENEMY AI</h3>
+        </div>
+        <p>A* pathfinding and Breadth-First Search drive every enemy. They will find you. They will chase you. There is nowhere to hide.</p>
+        <img src="IMAGES/ENEMY_CHASE.png" alt="Enemy chasing player" class="feat-img" />
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-hd">
+          <span class="feat-num">05</span>
+          <h3>VILLAGE GENERATION</h3>
+        </div>
+        <p>Procedural villages spawn across the world — buildings, paths, and town centers all laid out by algorithm. Every seed creates a new civilisation to explore.</p>
+        <img src="IMAGES/VILLAGE.png" alt="Village building" class="feat-img" />
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-hd">
+          <span class="feat-num">06</span>
+          <h3>FOLIAGE SYSTEM</h3>
+        </div>
+        <p>Trees, bushes, and rocks scatter dynamically across the terrain based on tile type and density. The world feels alive — and gives enemies plenty of places to lurk.</p>
+        <img src="IMAGES/Big_Tree.png" alt="Foliage generation" class="feat-img pixelated small-img" />
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-hd">
+          <span class="feat-num">07</span>
+          <h3>PERKS &amp; UPGRADES</h3>
+        </div>
+        <p>Collect perks scattered across the world — speed, armour, health. Stack bonuses and push further into the dark.</p>
+        <img src="IMAGES/Armour_Increase.png" alt="Armour perk" class="feat-img pixelated small-img" />
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-hd">
+          <span class="feat-num">08</span>
+          <h3>MULTIPLAYER CO-OP</h3>
+        </div>
+        <p>Custom TCP/UDP networking built with SFML sockets. Up to 4 players, one void, no mercy. Includes server browsing and LAN discovery.</p>
+        <div class="feat-noimg">
+          <span class="feat-void-txt">P1-P4</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="gallery-sec" id="gallery">
+    <p class="sec-tag">// SCREENSHOTS</p>
+    <h2 class="sec-h2">FROM THE VOID</h2>
+
+    <div class="gallery">
+      <div class="gal-item">
+        <img src="IMAGES/BLOOD_MON.png" alt="Blood Moon Event" />
+        <div class="gal-cap">Blood Moon Event</div>
+      </div>
+      <div class="gal-item">
+        <img src="IMAGES/ENEMY_CHASE.png" alt="Enemy Encounter" />
+        <div class="gal-cap">Enemy Encounter</div>
+      </div>
+      <div class="gal-item">
+        <img src="IMAGES/WALL_BUY.png" alt="Wall Buy System" />
+        <div class="gal-cap">Wall-Buy System</div>
+      </div>
+      <div class="gal-item">
+        <img src="IMAGES/noise_visualization.png" alt="Procedural Map Generation" />
+        <div class="gal-cap">Procedural Generation</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tech-sec" id="tech">
+    <p class="sec-tag">// BUILT WITH</p>
+    <h2 class="sec-h2">UNDER THE HOOD</h2>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <span class="tech-name">C++17</span>
+        <span class="tech-role">Core Language</span>
+      </div>
+      <div class="tech-card">
+        <span class="tech-name">SFML</span>
+        <span class="tech-role">Graphics · Audio · Networking</span>
+      </div>
+      <div class="tech-card">
+        <span class="tech-name">A*</span>
+        <span class="tech-role">Enemy Pathfinding</span>
+      </div>
+      <div class="tech-card">
+        <span class="tech-name">BFS</span>
+        <span class="tech-role">Graph Traversal AI</span>
+      </div>
+      <div class="tech-card">
+        <span class="tech-name">PERLIN NOISE</span>
+        <span class="tech-role">World Generation</span>
+      </div>
+      <div class="tech-card">
+        <span class="tech-name">TCP / UDP</span>
+        <span class="tech-role">Multiplayer Sockets</span>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="dev-sec" id="dev">
+    <p class="sec-tag">// DEVELOPER</p>
+    <div class="dev-card">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <span class="dev-roman">I</span>
+      <h2 class="dev-name">ALEX BOWES</h2>
+      <p class="dev-year">Year 4 · BSc Game Development</p>
+      <p class="dev-uni">South East Technological University</p>
+      <p class="dev-bio">
+        DEVOID is my final year capstone project — a fully featured game engine
+        built from scratch in C++. It includes procedural world generation,
+        multi-system enemy AI, a complete weapon economy, and custom-networked
+        multiplayer. Built to push every bit of what I learned across four years.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p class="foot-logo">D &nbsp; E &nbsp; V &nbsp; O &nbsp; I &nbsp; D</p>
+    <div class="foot-rule"></div>
+    <div class="foot-links">
+      <a href="mailto:alexbowes12@outlook.ie" class="foot-link">EMAIL — alexbowes12@outlook.ie</a>
+      <a href="https://www.linkedin.com/in/alex-bowes-567815288/" target="_blank" rel="noopener" class="foot-link">LINKEDIN</a>
+      <a href="https://github.com/alexbowes51" target="_blank" rel="noopener" class="foot-link">GITHUB</a>
+      <a href="https://alexbowes51.github.io" target="_blank" rel="noopener" class="foot-link">PORTFOLIO</a>
+    </div>
+    <p class="foot-copy">© 2026 Alex Bowes &nbsp;·&nbsp; SETU Final Year Project</p>
+    <p class="foot-quote">"Into the void, alone."</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
