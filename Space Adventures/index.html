@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="Developer" content="Alex Bowes">
+        <title>SPACE ADVENTURES</title>
+        <link rel="manifest" href="assets/manifest.json">
+        <link href="assets/stylesheet.css" rel="stylesheet" text="text/css">
+        <link rel="icon" href="assets/Images/Boss.png" type="image/x-icon">
+    </head>
+    <body>
+        <div id="intro">
+            <a href="../index.html" id="back-home">&#8592; Back to Portfolio</a>
+            <h2 id="dev-credit">Developer: Alex Bowes</h2>
+            <h1>SPACE ADVENTURES</h1>
+
+            <div id="name-section">
+                <p>Enter your name</p>
+                <input type="text" id="PlayerName" placeholder="Your name...">
+                <select id="savedNames" onchange="selectSavedName()">
+                    <option value="" selected>Select a saved name</option>
+                </select>
+                <button id="StartGame">Begin Adventure</button>
+            </div>
+
+            <div id="leaderboard-section">
+                <h2>Leaderboard</h2>
+                <ol id="leaderboard-list">
+                    <li><span>No scores yet!</span><span></span></li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="Game" style="display:none">
+            <canvas id="GamePlay"></canvas>
+            <div id="touch-controls">
+                <div id="dpad">
+                    <button class="dpad-btn" id="btn-up">&#9650;</button>
+                    <div id="dpad-row">
+                        <button class="dpad-btn" id="btn-left">&#9664;</button>
+                        <div id="dpad-center"></div>
+                        <button class="dpad-btn" id="btn-right">&#9654;</button>
+                    </div>
+                    <button class="dpad-btn" id="btn-down">&#9660;</button>
+                </div>
+                <button id="btn-shoot">FIRE</button>
+            </div>
+        </div>
+
+        <script src="assets/JavaScript.js"></script>
+    </body>
+</html>
