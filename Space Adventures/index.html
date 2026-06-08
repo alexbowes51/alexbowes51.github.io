@@ -26,7 +26,10 @@
 
 
             <div id="leaderboard-section">
-                <h2>Leaderboard</h2>
+                <div class="leaderboard-header">
+                    <h2>Leaderboard</h2>
+                    <button id="RefreshLeaderboard" class="small-btn">Refresh</button>
+                </div>
                 <ol id="leaderboard-list">
                     <li><span>No scores yet!</span><span></span></li>
                 </ol>
@@ -75,6 +78,10 @@
             </div>
         </div>
 
+        <!-- Firebase (optional) - the game will use Firestore if you provide a config in assets/firebase-config.js -->
+        <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+        <script src="assets/firebase-config.js"></script>
         <script src="assets/JavaScript.js"></script>
     </body>
 </html>

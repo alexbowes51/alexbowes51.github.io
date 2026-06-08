@@ -36,6 +36,154 @@ let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
 let gameRunning = false;
 
+// Remote leaderboard (Firestore) support
+let REMOTE_LEADERBOARD_ENABLED = (window.ENABLE_REMOTE_LEADERBOARD === true) && !!window.FIREBASE_CONFIG;
+let firestoreDB = null;
+
+async function remoteInit() {
+    if (!REMOTE_LEADERBOARD_ENABLED) return;
+    try {
+        firebase.initializeApp(window.FIREBASE_CONFIG);
+        firestoreDB = firebase.firestore();
+
+        // Ensure anonymous auth so every client has an auth.uid
+        if (!firebase.auth().currentUser) {
+            await firebase.auth().signInAnonymously();
+        }
+
+        // Optionally fetch remote leaderboard on start
+        const remote = await remoteFetchLeaderboard();
+        if (remote && remote.length) {
+            leaderboard = remote;
+            localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+        }
+    } catch (e) {
+        console.warn('Firebase init failed, falling back to local leaderboard.', e);
+        REMOTE_LEADERBOARD_ENABLED = false;
+    }
+}
+
+async function remoteUpdateLeaderboard(name, score) {
+    if (!REMOTE_LEADERBOARD_ENABLED || !firestoreDB) return;
+    try {
+        const user = firebase.auth().currentUser;
+        if (!user) return;
+        const uid = user.uid;
+
+        const docRef = firestoreDB.collection('leaderboard').doc(uid);
+        const doc = await docRef.get();
+        // Store name + score under user's doc. Only update if score is higher.
+        if (!doc.exists) {
+            await docRef.set({ uid, name, score, updated: firebase.firestore.FieldValue.serverTimestamp() });
+        } else {
+            const existing = doc.data();
+            if (score > (existing.score || 0)) {
+                await docRef.update({ name, score, updated: firebase.firestore.FieldValue.serverTimestamp() });
+            }
+        }
+    } catch (e) {
+        console.warn('Failed to update remote leaderboard', e);
+    }
+}
+
+async function remoteFetchLeaderboard() {
+    if (!REMOTE_LEADERBOARD_ENABLED || !firestoreDB) return null;
+    try {
+        const snap = await firestoreDB.collection('leaderboard').orderBy('score', 'desc').limit(50).get();
+        const arr = [];
+        snap.forEach(d => arr.push({ name: d.data().name, score: d.data().score }));
+        return arr;
+    } catch (e) {
+        console.warn('Failed to fetch remote leaderboard', e);
+        return null;
+    }
+}
+
+// Initialize remote if configured
+remoteInit();
+
+// Submit score to server Cloud Function endpoint (requires FUNCTION_ENDPOINT set)
+async function submitScoreToCloudFunction(endpointBase, name, score) {
+    try {
+        if (!endpointBase) throw new Error('No endpoint');
+        // Ensure anonymous auth exists
+        if (window.FIREBASE_CONFIG && firebase && !firebase.auth().currentUser) {
+            await firebase.auth().signInAnonymously();
+        }
+
+        // Ensure ID token
+        let idToken = null;
+        if (window.FIREBASE_CONFIG && firebase && firebase.auth().currentUser) {
+            idToken = await firebase.auth().currentUser.getIdToken(true);
+        }
+
+        // App Check token (if available)
+        let appCheckToken = null;
+        try {
+            if (window.FIREBASE_CONFIG && firebase && firebase.appCheck) {
+                const tokenResp = await firebase.appCheck().getToken();
+                appCheckToken = tokenResp.token;
+            }
+        } catch (e) {
+            console.warn('App Check token unavailable', e);
+        }
+
+        let url = endpointBase;
+        if (!url.endsWith('/submitScore')) url = url.replace(/\/$/, '') + '/submitScore';
+
+        const headers = { 'Content-Type': 'application/json' };
+        if (idToken) headers['Authorization'] = 'Bearer ' + idToken;
+        if (appCheckToken) headers['X-Firebase-AppCheck'] = appCheckToken;
+
+        const resp = await fetch(url, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ name, score })
+        });
+
+        if (!resp.ok) {
+            const text = await resp.text();
+            throw new Error('Function error: ' + resp.status + ' ' + text);
+        }
+
+        return await resp.json();
+    } catch (e) {
+        throw e;
+    }
+}
+
+// Refresh leaderboard UI (try remote if enabled, otherwise local)
+async function refreshLeaderboard() {
+    const btn = document.getElementById('RefreshLeaderboard');
+    if (btn) {
+        btn.disabled = true;
+        btn.classList.add('loading');
+    }
+    try {
+        if (REMOTE_LEADERBOARD_ENABLED) {
+            const remote = await remoteFetchLeaderboard();
+            if (remote && remote.length) {
+                leaderboard = remote;
+                localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+            }
+        } else {
+            leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+        }
+        renderLeaderboard();
+    } catch (e) {
+        console.warn('Refresh failed', e);
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.classList.remove('loading');
+        }
+    }
+}
+
+// Wire refresh button
+const refreshBtn = document.getElementById('RefreshLeaderboard');
+if (refreshBtn) refreshBtn.addEventListener('click', refreshLeaderboard);
+
 function gameOver() {
     gameRunning = false;
     // Update leaderboard and save before alert
@@ -76,6 +224,54 @@ function updateLeaderboard(name, currentScore) {
     leaderboard.sort((a, b) => b.score - a.score);
     localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
     renderLeaderboard();
+    
+    // Show loading indicator while submitting
+    const btn = document.getElementById('RefreshLeaderboard');
+    if (btn && !btn.classList.contains('loading')) {
+        btn.classList.add('loading');
+    }
+    
+    // If a cloud function endpoint is configured, submit there (server-side rate-limited).
+    if (window.FUNCTION_ENDPOINT) {
+        submitScoreToCloudFunction(window.FUNCTION_ENDPOINT, name, currentScore).then(() => {
+            // After successful server submit, refresh remote leaderboard if remote is enabled
+            if (REMOTE_LEADERBOARD_ENABLED) {
+                remoteFetchLeaderboard().then(remote => {
+                    if (remote && remote.length) {
+                        leaderboard = remote;
+                        localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+                        renderLeaderboard();
+                    }
+                    if (btn) btn.classList.remove('loading');
+                });
+            } else if (btn) btn.classList.remove('loading');
+        }).catch(err => {
+            console.warn('Function submit failed, falling back to direct remote update', err);
+            if (btn) btn.classList.remove('loading');
+            if (REMOTE_LEADERBOARD_ENABLED) {
+                remoteUpdateLeaderboard(name, currentScore);
+            }
+        });
+        return;
+    }
+
+    // Otherwise fallback to direct Firestore update (if enabled)
+    if (REMOTE_LEADERBOARD_ENABLED) {
+        remoteUpdateLeaderboard(name, currentScore).then(() => {
+            // optionally refresh remote leaderboard into local copy
+            remoteFetchLeaderboard().then(remote => {
+                if (remote && remote.length) {
+                    leaderboard = remote;
+                    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+                    renderLeaderboard();
+                }
+                if (btn) btn.classList.remove('loading');
+            });
+        }).catch(err => {
+            console.warn('Remote update failed', err);
+            if (btn) btn.classList.remove('loading');
+        });
+    } else if (btn) btn.classList.remove('loading');
 }
 
 function renderLeaderboard() {
@@ -100,10 +296,21 @@ function renderLeaderboard() {
     });
 }
 
-// ===== Canvas resize =====
+// ===== Canvas resize (preserve aspect ratio using virtual resolution) =====
+const BASE_WIDTH = 800;
+const BASE_HEIGHT = 600;
 function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const scale = Math.max(0.5, Math.min(vw / BASE_WIDTH, vh / BASE_HEIGHT));
+
+    // Use a fixed internal resolution for consistent gameplay logic
+    canvas.width = BASE_WIDTH;
+    canvas.height = BASE_HEIGHT;
+
+    // Scale the canvas visually to fit the viewport while preserving aspect
+    canvas.style.width = Math.floor(BASE_WIDTH * scale) + 'px';
+    canvas.style.height = Math.floor(BASE_HEIGHT * scale) + 'px';
 }
 
 // ===== Saved name dropdown =====
@@ -501,57 +708,48 @@ function GamerInput(input){
 
 let gamerInput = new GamerInput("none");
 let spaceKeyPressed;
+// Track pressed keys to allow simultaneous inputs (move + shoot)
+let keysPressed = {};
+
+function isTyping() {
+    const el = document.activeElement;
+    if (!el) return false;
+    const tag = el.tagName.toLowerCase();
+    return tag === 'input' || tag === 'textarea' || tag === 'select';
+}
 
 //checks input events 
 function input(event) {
-    // Take Input from the Player
-    // console.log("Input");
-    console.log(event);
-    console.log("Event type: " + event.type);
-    // console.log("Keycode: " + event.key);
-
-    if (event.type === "keydown") {
-        switch (event.key.toLowerCase()) {
-            case "a": // Left
-                gamerInput = new GamerInput("Left");
-                event.preventDefault();
-                break; //Left key
-            case "w": // Up
-                gamerInput = new GamerInput("Up");
-                event.preventDefault();
-                break; //Up key
-            case "d": // Right
-                gamerInput = new GamerInput("Right");
-                event.preventDefault();
-                break; //Right key
-            case "s": // Down
-                gamerInput = new GamerInput("Down");
-                event.preventDefault();
-                break; //Down key
-            case " ":
-                gamerInput = new GamerInput("Shoot");
-                if (!spaceKeyPressed) {
-                    gamerInput = new GamerInput("Shoot");
-                    event.preventDefault();
-                    spaceKeyPressed = true; // Set the variable to true only if it was false
-                }
-                break;
-            case "Control":
-                gamerInput = new GamerInput("Heal");
-                event.preventDefault();
-            break;
-            default:
-                gamerInput = new GamerInput("None"); //No Input
+    // Ignore game input while user is typing in an input/select/textarea
+    if (isTyping()) {
+        // Allow Enter to start the game when focused on the name input
+        if (event.type === 'keydown' && event.key === 'Enter' && document.activeElement === playerNameInput) {
+            startGame();
         }
-    } else {
-        gamerInput = new GamerInput("None");
-    }if(event.type === "keyup") {
-    switch (event.key) {
-        case " ":
-            spaceKeyPressed = false; // Reset the variable when the space key is released
-            break;
+        return;
     }
-}
+
+    // Normalize key string
+    const key = (event.key && event.key.length === 1) ? event.key.toLowerCase() : event.key;
+
+    if (event.type === 'keydown') {
+        // Register key state
+        keysPressed[key] = true;
+
+        // Prevent page scrolling for relevant keys
+        if (['w','a','s','d',' ','Spacebar','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Control'].includes(key)) {
+            event.preventDefault();
+        }
+    } else if (event.type === 'keyup') {
+        // Clear key state
+        delete keysPressed[key];
+
+        // Ensure spaceKeyPressed is reset on space release
+        if (key === ' ' || key === 'Spacebar' || key === 'Space') {
+            spaceKeyPressed = false;
+            PlayerShoot = false;
+        }
+    }
 }
 
 
@@ -733,26 +931,35 @@ function checkCollisionPlayerBulletMeteor(bullet, meteor) {
 function update() {
     // console.log("Update");
     // Check Input
-    if (gamerInput.action === "Up") {
-        console.log("Move Up");
-        Player.y -= 2; // Move Player Up
-    }  if (gamerInput.action === "Down") {
-        console.log("Move Down");
-        Player.y += 2; // Move Player Down
-    }  if (gamerInput.action === "Left") {
-        console.log("Move Left");
-        Player.x -= 2; // Move Player Left
-    }  if (gamerInput.action === "Right") {
-        console.log("Move Right");
-        Player.x += 2; // Move Player Right
-    }  if (gamerInput.action === "Shoot") {
-        console.log("Space")
-       createPlayerBullet();
+    const speed = 2;
+    // Vertical
+    if (keysPressed['w'] || keysPressed['ArrowUp'] || keysPressed['arrowup']) {
+        Player.y -= speed;
     }
-       if(!gamerInput.action === "Shoot"){
-        PlayerShoot = false;
-    }  if (gamerInput.action === "Control"){
+    if (keysPressed['s'] || keysPressed['ArrowDown'] || keysPressed['arrowdown']) {
+        Player.y += speed;
+    }
+    // Horizontal
+    if (keysPressed['a'] || keysPressed['ArrowLeft'] || keysPressed['arrowleft']) {
+        Player.x -= speed;
+    }
+    if (keysPressed['d'] || keysPressed['ArrowRight'] || keysPressed['arrowright']) {
+        Player.x += speed;
+    }
+
+    // Shooting - allow simultaneous movement + shooting
+    if (keysPressed[' '] || keysPressed['space'] || keysPressed['Spacebar']) {
+        spaceKeyPressed = true;
+        createPlayerBullet();
+    } else {
+        spaceKeyPressed = false;
+    }
+
+    // Heal
+    if (keysPressed['Control'] || keysPressed['control']) {
         Player.Health += 10;
+        delete keysPressed['Control'];
+        delete keysPressed['control'];
     }
 
     if (Player.x <= 0) Player.x = 0;
@@ -830,26 +1037,31 @@ window.addEventListener('keyup', input);
 
 // ===== Touch controls for mobile =====
 function setupTouchControls() {
-    const bindings = [
-        ['btn-up',    'Up'],
-        ['btn-down',  'Down'],
-        ['btn-left',  'Left'],
-        ['btn-right', 'Right'],
-        ['btn-shoot', 'Shoot'],
-    ];
-    bindings.forEach(([id, action]) => {
+    const map = {
+        'btn-up': 'w',
+        'btn-down': 's',
+        'btn-left': 'a',
+        'btn-right': 'd',
+        'btn-shoot': ' '
+    };
+
+    Object.keys(map).forEach(id => {
+        const key = map[id];
         const btn = document.getElementById(id);
         if (!btn) return;
-        btn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            gamerInput = new GamerInput(action);
-            if (action === 'Shoot') spaceKeyPressed = true;
-        }, { passive: false });
-        btn.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            gamerInput = new GamerInput('None');
-            if (action === 'Shoot') spaceKeyPressed = false;
-        }, { passive: false });
+
+        const down = (e) => { e.preventDefault(); keysPressed[key] = true; };
+        const up = (e) => { e.preventDefault(); delete keysPressed[key]; if (key === ' ') { spaceKeyPressed = false; PlayerShoot = false; } };
+
+        // Touch
+        btn.addEventListener('touchstart', down, { passive: false });
+        btn.addEventListener('touchend', up, { passive: false });
+        btn.addEventListener('touchcancel', up, { passive: false });
+
+        // Mouse / pointer support
+        btn.addEventListener('mousedown', down);
+        window.addEventListener('mouseup', up);
+        btn.addEventListener('mouseleave', up);
     });
 }
 setupTouchControls();
