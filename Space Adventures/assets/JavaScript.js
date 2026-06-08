@@ -38,8 +38,14 @@ let gameRunning = false;
 
 function gameOver() {
     gameRunning = false;
+    // Update leaderboard and save before alert
     updateLeaderboard(playerName, score);
-    alert(`Game Over, ${playerName}! Your final score is ${score}.`);
+    // Force a save to ensure persistence
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    
+    const finalScore = score;
+    alert(`Game Over, ${playerName}! Your final score is ${finalScore}.`);
+    
     score = 0;
     level = 1;
     MaxEnemys = 5;
@@ -50,9 +56,13 @@ function gameOver() {
     meteors = [];
     enemybullets = [];
     playerbullets = [];
+    
     // Return to main menu
     gameSection.style.display = "none";
     introSection.style.display = "flex";
+    
+    // Reload leaderboard from storage to ensure it's up-to-date
+    leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
     renderLeaderboard();
 }
 
@@ -501,20 +511,20 @@ function input(event) {
     // console.log("Keycode: " + event.key);
 
     if (event.type === "keydown") {
-        switch (event.key) {
-            case "ArrowLeft": // Left Arrow
+        switch (event.key.toLowerCase()) {
+            case "a": // Left
                 gamerInput = new GamerInput("Left");
                 event.preventDefault();
                 break; //Left key
-            case "ArrowUp": // Up Arrow
+            case "w": // Up
                 gamerInput = new GamerInput("Up");
                 event.preventDefault();
                 break; //Up key
-            case "ArrowRight": // Right Arrow
+            case "d": // Right
                 gamerInput = new GamerInput("Right");
                 event.preventDefault();
                 break; //Right key
-            case "ArrowDown": // Down Arrow
+            case "s": // Down
                 gamerInput = new GamerInput("Down");
                 event.preventDefault();
                 break; //Down key
