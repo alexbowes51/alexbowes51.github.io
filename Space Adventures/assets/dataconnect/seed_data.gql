@@ -1,0 +1,44 @@
+mutation CreateSeedData @transaction {
+  game_insertMany(data: [
+    {
+      id: "00000000-0000-0000-0000-000000000001",
+      title: "Galactic Conqueror",
+      genre: "Strategy",
+      description: "A fast-paced space strategy game."
+    },
+    {
+      id: "00000000-0000-0000-0000-000000000002",
+      title: "Dungeon Crawler",
+      genre: "RPG",
+      description: "Explore endless dungeons and collect loot."
+    }
+  ])
+  player_insertMany(data: [
+    {
+      id: "00000000-0000-0000-0000-000000000010",
+      nickname: "SpaceAce",
+      joinDate: "2023-01-15"
+    },
+    {
+      id: "00000000-0000-0000-0000-000000000011",
+      nickname: "LootMaster",
+      joinDate: "2023-02-20"
+    }
+  ])
+  score_insertMany(data: [
+    {
+      value: 1500,
+      timestamp: "2023-10-01T12:00:00Z",
+      platform: "PC",
+      game: { id: "00000000-0000-0000-0000-000000000001" },
+      player: { id: "00000000-0000-0000-0000-000000000010" }
+    },
+    {
+      value: 3200,
+      timestamp: "2023-10-02T14:30:00Z",
+      platform: "Console",
+      game: { id: "00000000-0000-0000-0000-000000000002" },
+      player: { id: "00000000-0000-0000-0000-000000000011" }
+    }
+  ])
+}

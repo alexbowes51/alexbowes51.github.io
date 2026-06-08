@@ -1,0 +1,21 @@
+mutation CreateGame($title: String!, $genre: String!) @auth(level: USER) {
+  game_insert(data: { title: $title, genre: $genre })
+}
+
+mutation RegisterPlayer($nickname: String!, $joinDate: Date!) @auth(level: USER) {
+  player_insert(data: { nickname: $nickname, joinDate: $joinDate })
+}
+
+query ListTopScores($gameId: UUID!) @auth(level: PUBLIC) {
+  scores(where: { gameId: { eq: $gameId } }, orderBy: [{ value: DESC }], limit: 10) {
+    value
+    platform
+    player {
+      nickname
+    }
+  }
+}
+
+mutation UpdatePlayerEmail($id: UUID!, $email: String!) @auth(level: USER) {
+  player_update(id: $id, data: { email: $email })
+}

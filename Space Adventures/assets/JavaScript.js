@@ -16,7 +16,7 @@ let level = 0;
 const savedNames = JSON.parse(localStorage.getItem("savedNames")) || [];
 
 // Use stored player name, score, and level on page load
-window.addEventListener('load', (event) => {
+window.addEventListener('load', async (event) => {
     playerName = getPlayerName();
     score = parseInt(localStorage.getItem("PlayerScore")) || 0;
     level = parseInt(localStorage.getItem("PlayerLevel")) || 1;
@@ -28,7 +28,19 @@ window.addEventListener('load', (event) => {
 
     // Update dropdown list with saved names
     updateDropdownList();
-    renderLeaderboard();
+
+    // Ensure remote is initialized and then refresh leaderboard if remote is enabled
+    try {
+        await remoteInit();
+        if (REMOTE_LEADERBOARD_ENABLED) {
+            await refreshLeaderboard();
+        } else {
+            renderLeaderboard();
+        }
+    } catch (e) {
+        console.warn('Error initializing remote leaderboard on load', e);
+        renderLeaderboard();
+    }
 });
 
 // ===== Leaderboard =====

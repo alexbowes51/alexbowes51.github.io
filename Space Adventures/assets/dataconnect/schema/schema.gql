@@ -1,0 +1,26 @@
+type Game @table {
+  title: String!
+  genre: String!
+  description: String
+  releaseDate: Date
+}
+
+type Player @table {
+  nickname: String!
+  joinDate: Date!
+  email: String
+}
+
+type Score @table {
+  value: Int!
+  timestamp: Timestamp!
+  platform: String
+  game: Game!
+  player: Player!
+}
+
+type LeaderboardSummary @table {
+  game: Game!
+  topScoreValue: Int!
+  holderNickname: String!
+}
