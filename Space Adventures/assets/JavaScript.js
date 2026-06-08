@@ -729,23 +729,26 @@ function input(event) {
         return;
     }
 
-    // Normalize key string
-    const key = (event.key && event.key.length === 1) ? event.key.toLowerCase() : event.key;
+    // Normalize key string - standardize space key as ' '
+    let key = event.key;
+    if (key === 'Spacebar' || key === 'Space') key = ' ';  // normalize space variants
+    if (key && key.length === 1) key = key.toLowerCase();
+    else if (key) key = key.toLowerCase();  // also lowercase multi-char keys for consistency
 
     if (event.type === 'keydown') {
         // Register key state
         keysPressed[key] = true;
 
         // Prevent page scrolling for relevant keys
-        if (['w','a','s','d',' ','Spacebar','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Control'].includes(key)) {
+        if ([' ','w','a','s','d','arrowup','arrowdown','arrowleft','arrowright','control'].includes(key)) {
             event.preventDefault();
         }
     } else if (event.type === 'keyup') {
         // Clear key state
         delete keysPressed[key];
 
-        // Ensure spaceKeyPressed is reset on space release
-        if (key === ' ' || key === 'Spacebar' || key === 'Space') {
+        // Ensure spaceKeyPressed and PlayerShoot are reset on space release
+        if (key === ' ') {
             spaceKeyPressed = false;
             PlayerShoot = false;
         }
@@ -846,43 +849,42 @@ function Shoot() {
     if(playerbullets[i]){
         let bullet = playerbullets[i];
 
-        if (PlayerShoot) {
-            bullet.x += bullet.speed;
+        // Bullets always move regardless of PlayerShoot state
+        bullet.x += bullet.speed;
 
-            // Check collision with enemies
-            for (let j = 0; j < enemies.length; j++) {
-                let enemy = enemies[j];
-                if (checkCollisionPlayerBulletEnemy(bullet, enemy)) {
-                    // Remove the bullet
-                    playerbullets.splice(i, 1);
-                    i--;
+        // Check collision with enemies
+        for (let j = 0; j < enemies.length; j++) {
+            let enemy = enemies[j];
+            if (checkCollisionPlayerBulletEnemy(bullet, enemy)) {
+                // Remove the bullet
+                playerbullets.splice(i, 1);
+                i--;
 
-                    if (enemy.Health <= 0) {
-                        // Remove enemy if health is 0 or below
-                        enemies.splice(j, 1);
-                        j--; // Adjust index after removing the enemy
-                    }
-
-                    break; // Exit the loop after handling collision
+                if (enemy.Health <= 0) {
+                    // Remove enemy if health is 0 or below
+                    enemies.splice(j, 1);
+                    j--; // Adjust index after removing the enemy
                 }
+
+                break; // Exit the loop after handling collision
             }
+        }
 
-            // Check collision with meteors
-            for (let j = 0; j < meteors.length; j++) {
-                let meteor = meteors[j];
-                if (checkCollisionPlayerBulletMeteor(bullet, meteor)) {
-                    // Remove the bullet
-                    playerbullets.splice(i, 1);
-                    i--;
+        // Check collision with meteors
+        for (let j = 0; j < meteors.length; j++) {
+            let meteor = meteors[j];
+            if (checkCollisionPlayerBulletMeteor(bullet, meteor)) {
+                // Remove the bullet
+                playerbullets.splice(i, 1);
+                i--;
 
-                    if (meteor.Health <= 0) {
-                        // Remove meteor if health is 0 or below
-                        meteors.splice(j, 1);
-                        j--; // Adjust index after removing the meteor
-                    }
-
-                    break; // Exit the loop after handling collision
+                if (meteor.Health <= 0) {
+                    // Remove meteor if health is 0 or below
+                    meteors.splice(j, 1);
+                    j--; // Adjust index after removing the meteor
                 }
+
+                break; // Exit the loop after handling collision
             }
         }
 
@@ -948,11 +950,12 @@ function update() {
     }
 
     // Shooting - allow simultaneous movement + shooting
-    if (keysPressed[' '] || keysPressed['space'] || keysPressed['Spacebar']) {
+    if (keysPressed[' ']) {
         spaceKeyPressed = true;
         createPlayerBullet();
     } else {
         spaceKeyPressed = false;
+        PlayerShoot = false;  // Ensure bullets stop if space is released
     }
 
     // Heal
